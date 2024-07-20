@@ -12,7 +12,7 @@ import lombok.*;
         query="select m from Member m where m.username = :username")
 @NamedEntityGraph(name = "Member.all", attributeNodes =
 @NamedAttributeNode("team"))
-public class Member {
+public class Member extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "member_id")
@@ -43,5 +43,15 @@ public class Member {
     public void changeTeam(Team team) {
         this.team = team;
         team.getMembers().add(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", age=" + age +
+                ", team=" + team +
+                '}';
     }
 }
